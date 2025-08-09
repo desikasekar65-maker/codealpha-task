@@ -1,0 +1,30 @@
+📌 Name: DESIKA S
+Company: CodeAlpha
+Student ID: CA/JU1/32461
+Domain: Frontend Development
+Duration: 10th July 2025 – 10th August 2025
+Mentor: Swati Srivastava
+
+🧠 Project Overview
+Project: Image Gallery 🖼️
+
+🎯 Objective
+To design and develop an interactive image gallery that allows users to view images in a grid layout and open them in a larger preview with smooth transitions, using HTML, CSS, and JavaScript.
+
+🛠 Key Activities
+1.Created a responsive image grid using HTML and CSS.
+2.Styled gallery layout with hover effects for better user engagement.
+3.Implemented JavaScript to open selected images in a modal/lightbox view.
+4.Added navigation controls (Next/Previous) inside the preview mode.
+5.Enabled close functionality to exit the preview smoothly.
+
+⚙️ Technologies Used
+1.HTML – Structure for the image grid and modal.
+2.CSS – Styling, grid layout, animations, and responsiveness.
+3.JavaScript – Interactivity for modal view, navigation, and event handling.
+
+💡 Key Insights
+1.Learned how to create responsive layouts using CSS Grid/Flexbox.
+2.Gained experience in implementing modal pop-ups for image previews.
+3.Improved skills in DOM manipulation and event listener usage.
+4.Enhanced knowledge of designing user-friendly, interactive image interfaces.
