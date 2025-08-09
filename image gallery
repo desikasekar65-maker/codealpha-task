@@ -1,0 +1,216 @@
+/*index.html*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <h1>Image Gallery</h1>
+
+ 
+  <div class="filters">
+    <button data-category="all">All</button>
+    <button data-category="nature">Nature</button>
+    <button data-category="architecture">Architecture</button>
+    <button data-category="animals">Animals</button>
+  </div>
+
+  
+  <div class="gallery">
+    <div class="image" data-category="nature">
+      <img src="C:\Users\HARINI\Downloads\TOC\falls1.jpeg" alt="Nature">
+    </div>
+    <div class="image" data-category="architecture">
+      <img src="C:\Users\HARINI\Downloads\TOC\building.jpeg" alt="Architecture">
+    </div>
+    <div class="image" data-category="animals">
+      <img src="C:\Users\HARINI\Downloads\TOC\wild1.jpeg" alt="Animal">
+    </div>
+    <div class="image" data-category="animals">
+      <img src="C:\Users\HARINI\Downloads\TOC\wild2.jpeg"alt="Animal">
+    </div>
+   
+  </div>
+
+ 
+  <div id="lightbox" class="lightbox hidden">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-controls">
+      <span id="prev">&#10094;</span>
+      <span id="next">&#10095;</span>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+/*style.css*/
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: skyblue;
+}
+
+h1 {
+  text-align: center;
+}
+
+.filters {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filters button {
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: lavender;
+  color: black;
+  border-radius: 5px;
+}
+
+.filters button:hover {
+  background-color: peru;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.image {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  border-radius: 10px;
+}
+
+.image:hover img {
+  transform: scale(1.05);
+  filter: brightness(85%);
+}
+
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+}
+
+.lightbox-controls {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.lightbox-controls span {
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+
+@media (max-width: 600px) {
+  .lightbox-controls span {
+    font-size: 30px;
+  }
+}
+
+
+/*script.js*/
+
+const images = document.querySelectorAll('.image img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const filterButtons = document.querySelectorAll('.filters button');
+
+let currentIndex = 0;
+
+
+images.forEach((img, index) => {
+  img.addEventListener('click', () => {
+    lightbox.classList.remove('hidden');
+    lightboxImg.src = img.src;
+    currentIndex = index;
+  });
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.classList.add('hidden');
+});
+
+
+nextBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+prevBtn.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  lightboxImg.src = images[currentIndex].src;
+});
+
+
+filterButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.dataset.category;
+    document.querySelectorAll('.image').forEach(image => {
+      if (category === 'all' || image.dataset.category === category) {
+        image.style.display = 'block';
+      } else {
+        image.style.display = 'none';
+      }
+    });
+  });
+});
